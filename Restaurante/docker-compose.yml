@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: restaurante
     volumes:
       - db_data:/var/lib/mysql
-      - ./src/init.sql:docker-entrypoint-init.d/init.sql
+       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:
