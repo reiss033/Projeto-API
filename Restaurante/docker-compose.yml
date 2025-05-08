@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=restaurante123
+      - DB_NAME=restaurante
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: restaurante123
+      MYSQL_DATABASE: restaurante
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/init.sql:docker-entrypoint-init.d/init.sql
+
+volumes:
+  db_data:
